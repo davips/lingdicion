@@ -19,6 +19,12 @@ The first common step is to clone this repository.
 ```bash
 git clone https://github.com/davips/lingdicion
 ```
+The second step is to install libraries to be able to compile this projet to native code:
+```bash
+sudo apt install clang libunwind-dev
+sudo apt install libgc-dev libre2-dev
+```
+The second line may be unnecessary.
 
 Intellij IDEA
 -------------
