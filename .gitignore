@@ -17,6 +17,8 @@ project/plugins/project/
 .scala_dependencies
 .idea/workspace.xml
 .idea/status.xml
+.idea/modules/lingdicion-build.iml
+.idea/modules/lingdicion.iml
 
 # NetBeans specific
 funcJava/nbproject/private/

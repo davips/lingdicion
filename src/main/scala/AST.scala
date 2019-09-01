@@ -63,11 +63,11 @@ object AST {
     def jvm: String
   }
 
-    case object Empty extends Expr {
-      t = EmptyT
+  case object Empty extends Expr {
+    t = EmptyT
 
-      override def toString = "Ø"
-    }
+    override def toString = "Ø"
+  }
 
   //  case class BooleanExpr(b: Boolean) extends Expr {
   //    t = BooleanT
@@ -102,38 +102,38 @@ object AST {
   }
 
   case class LambdaE(param: String, body: Expr) extends ItemExpr {
-    override def toString = "{" + param + " => " + body + "}"
+    override def toString = param + " => " + body
   }
 
   case class ListExpr(l: List[ItemExpr]) extends Expr {
     t = ListT(EmptyT)
 
-    override def toString: String = l.toString
+    override def toString: String = "[" + l.mkString(", ") + "]"
 
-//    override def dressed_string = dress(t, exprs)
+    //    override def dressed_string = dress(t, exprs)
   }
 
   def nake(t: ExprType, exprs: Array[Expr]) = if (t == ListT(CharacterT)) str2print(exprs.mkString) else "[" + exprs.mkString(", ") + "]"
 
-//  def dress(t: ExprType, exprs: Array[Expr]) = if (t == ListT(CharacterT)) "\"" + str2print(exprs.mkString) + "\"" else "[" + exprs.map(_.dressed_string).mkString(", ") + "]"
+  //  def dress(t: ExprType, exprs: Array[Expr]) = if (t == ListT(CharacterT)) "\"" + str2print(exprs.mkString) + "\"" else "[" + exprs.map(_.dressed_string).mkString(", ") + "]"
 
   def str2print(str: String) = str.replace("\n", "\\n").replace("”", "\\”")
 
-//  case class ConcatenateListExpr(e1: Expr, e2: Expr) extends Expr {
-//    t = ListT(EmptyT)
-//
-//    override def toString = e1 + " ++ " + e2
-//
-//    override def dressed_string = e1.dressed_string + " ++ " + e2.dressed_string
-//  }
-//
-//  case class Assign(name: String, expr: Expr) extends Expr {
-//    t = EmptyT
-//
-//    override def toString = name + " = " + expr.toString
-//
-//    override def dressed_string = name + " = " + expr.dressed_string
-//  }
+  //  case class ConcatenateListExpr(e1: Expr, e2: Expr) extends Expr {
+  //    t = ListT(EmptyT)
+  //
+  //    override def toString = e1 + " ++ " + e2
+  //
+  //    override def dressed_string = e1.dressed_string + " ++ " + e2.dressed_string
+  //  }
+  //
+  //  case class Assign(name: String, expr: Expr) extends Expr {
+  //    t = EmptyT
+  //
+  //    override def toString = name + " = " + expr.toString
+  //
+  //    override def dressed_string = name + " = " + expr.dressed_string
+  //  }
 
   case class Shell(e: Expr) extends Expr
 
@@ -227,6 +227,10 @@ object AST {
     override def toString = "(" + func + " " + arg + ")"
   }
 
+  case class PrepE(item: Expr, list: Expr) extends Expr {
+    override def toString = " " + item + "&" + list + " "
+  }
+
   case class NotApplicable(e1: Expr, arg: Expr) extends Expr
 
   case class Ident(name: String) extends Expr {
@@ -265,17 +269,17 @@ object AST {
   }
 
 
-//  case class Closure(ctxt: Interpreter.Context, lam: LambdaE) extends Expr {
-//    override def toString = "Closure " +
-//      lam.param.toString + ",\n Body{" + lam.body + "}\n)"
-//
-//    def apply(arg: Expr) = {
-//      val newctxt = new Interpreter.Context(ctxt.env ++ List(lam.param -> arg))
-//      val res = newctxt eval lam.body
-//      ctxt.env = ctxt.env ++ newctxt.env.filter(x => x._1.startsWith("$") && ctxt.env.keySet.contains(x._1)) //mutability
-//      res
-//    }
-//  }
+  //  case class Closure(ctxt: Interpreter.Context, lam: LambdaE) extends Expr {
+  //    override def toString = "Closure " +
+  //      lam.param.toString + ",\n Body{" + lam.body + "}\n)"
+  //
+  //    def apply(arg: Expr) = {
+  //      val newctxt = new Interpreter.Context(ctxt.env ++ List(lam.param -> arg))
+  //      val res = newctxt eval lam.body
+  //      ctxt.env = ctxt.env ++ newctxt.env.filter(x => x._1.startsWith("$") && ctxt.env.keySet.contains(x._1)) //mutability
+  //      res
+  //    }
+  //  }
 
 }
 

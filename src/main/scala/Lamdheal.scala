@@ -24,7 +24,7 @@ import io.Source
     along with lamdheal.  If not, see <http://www.gnu.org/licenses/>.*/
 object Lamdheal {
    def run_file(arq: String) {
-      run_string(Source.fromFile(arq + ".lid").getLines().toList.mkString(Parseador.separator))
+      run_string(Source.fromFile(arq + ".lid").getLines().toList.mkString("\n"))
    }
 
    def run_string(input: String, web: Boolean = false, command_line_Args: List[String] = List()) {
@@ -37,24 +37,25 @@ object Lamdheal {
          tf = System.currentTimeMillis()
          if (!web) {println("________________________________________________Time parsing " + (tf - ti) / 1000d + "s")}
 
-         //         println("___________________________________________________________________")
-         ti = System.currentTimeMillis()
-         //         val typedast =
-         HindleyMilner.check(ast)
-         tf = System.currentTimeMillis()
-         if (!web) {println("________________________________________________Time checking types " + (tf - ti) / 1000d + "s")}
-
-         //         println("___________________________________________________________________")
-         ti = System.currentTimeMillis()
-//         Interpreter eval(ast, command_line_Args, web)
-         tf = System.currentTimeMillis()
-         if (!web) {println("________________________________________________Time interpreting " + (tf - ti) / 1000d + "s")}
-         //
-         //println("___________________________________________\n")
-         //         ti = System.currentTimeMillis()
-         ////         Compiler eval(ast, input, web)
-         //         tf = System.currentTimeMillis()
-         //         if (!web) {println("Time compiling " + (tf - ti) / 1000d + "s\n")}
+        sys.exit(0)
+//         //         println("___________________________________________________________________")
+//         ti = System.currentTimeMillis()
+//         //         val typedast =
+//         HindleyMilner.check(ast)
+//         tf = System.currentTimeMillis()
+//         if (!web) {println("________________________________________________Time checking types " + (tf - ti) / 1000d + "s")}
+//
+//         //         println("___________________________________________________________________")
+//         ti = System.currentTimeMillis()
+////         Interpreter eval(ast, command_line_Args, web)
+//         tf = System.currentTimeMillis()
+//         if (!web) {println("________________________________________________Time interpreting " + (tf - ti) / 1000d + "s")}
+//         //
+//         //println("___________________________________________\n")
+//         //         ti = System.currentTimeMillis()
+//         ////         Compiler eval(ast, input, web)
+//         //         tf = System.currentTimeMillis()
+//         //         if (!web) {println("Time compiling " + (tf - ti) / 1000d + "s\n")}
 
       }
       catch {
