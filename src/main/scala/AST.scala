@@ -97,7 +97,11 @@ object AST {
 
   sealed abstract class ItemExpr extends Expr
 
-  case class TupleExpr(k: Expr, v: Expr) extends ItemExpr {
+  case class PatternExpr(k: Expr, v: Expr) extends ItemExpr {
+    override def toString = (k -> v).toString
+  }
+
+  case class AssignExpr(k: Expr, v: Expr) extends ItemExpr {
     override def toString = (k -> v).toString
   }
 
@@ -227,8 +231,12 @@ object AST {
     override def toString = "(" + func + " " + arg + ")"
   }
 
-  case class PrepE(item: Expr, list: Expr) extends Expr {
-    override def toString = " " + item + "&" + list + " "
+  case class PrependE(item: Expr, list: Expr) extends Expr {
+    override def toString =  item + " & " + list
+  }
+
+  case class UnpackE(item: Expr, list: Expr) extends Expr {
+    override def toString = item + " & " + list
   }
 
   case class NotApplicable(e1: Expr, arg: Expr) extends Expr

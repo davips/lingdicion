@@ -60,9 +60,9 @@ object Parseador extends RegexParsers with ImplicitConversions with JavaTokenPar
 
   type P[+T] = PackratParser[T]
 
-  lazy val dict: P[ListExpr] = "[" ~> (repsep(assign | tuple, ",") ^^ ListExpr) <~ "]"
-  lazy val assign: P[ItemExpr] = ident ~ (":" ~> (appl | expr)) ^^ LambdaE
-  lazy val tuple: P[ItemExpr] = expr ~ (":" ~> (appl | expr)) ^^ TupleExpr
+  lazy val dict: P[ListExpr] = "[" ~> (rep1sep(assign | tuple, ",") ^^ ListExpr) <~ "]"
+  lazy val assign: P[ItemExpr] = (unpack|identifier) ~ ("→" ~> (prepend |appl | expr)) ^^ AssignExpr
+  lazy val tuple: P[ItemExpr] = (prepend|expr ) ~ ("←" ~> ( unpack|appl | expr)) ^^ PatternExpr
   lazy val expr: P[Expr] = {
     (prepend
       | identifier
@@ -75,7 +75,10 @@ object Parseador extends RegexParsers with ImplicitConversions with JavaTokenPar
   }
   lazy val identifier: P[Expr] = ident ^^ { x => Ident(x) }
   lazy val appl: P[Expr] = ((appl | dict | identifier) ~ expr) ^^ ApplyE
-  lazy val prepend: P[Expr] = expr ~ ("&" ~> expr) ^^ PrepE
+
+  lazy val headtail:P[Expr ~ Expr] = expr ~ ("&" ~> expr)
+  lazy val prepend: P[Expr] = headtail ^^ PrependE
+  lazy val unpack: P[Expr] = headtail ^^ UnpackE
 
   //   def equality(h: Has_) = sum(h) * ("==" ^^^ EqualE | "!=" ^^^ DiffE | ">=" ^^^ GreaterEqual | "<=" ^^^ LesserEqual | ">" ^^^ Greater | "<" ^^^ Lesser)
 
