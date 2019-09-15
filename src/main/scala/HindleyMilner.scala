@@ -2,8 +2,8 @@
 Based on the Andrew Forrest's adaptation for Scala
 http://dysphoria.net/code/hindley-milner/HindleyMilner.scala
 
-    Copyright 2013 Davi Pereira dos Santos
-    This file is part of lamdheal.
+    Copyright 2019 Davi Pereira dos Santos
+    This file is part of lingdicion.
     Initially written according to the guidelines in the Masterarbeit of Eugen Labun.
 
     Lamdheal is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ http://web.archive.org/web/20050420002559/www.cs.berkeley.edu/~nikitab/courses/c
 which in turn is based on the paper by Luca Cardelli at
 http://lucacardelli.name/Papers/BasicTypechecking.pdf
 Do with it what you will.
-"Do with [original work] what you will", but respect license for this version.
+"Do with [original work] what you will", but respect the GPL license for the current version.
 */
 
 package lamdheal

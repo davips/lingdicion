@@ -1,7 +1,7 @@
 import lamdheal.Lamdheal
 
-/*  Copyright 2013 Davi Pereira dos Santos
-    This file is part of lamdheal.
+/*  Copyright 2019 Davi Pereira dos Santos
+    This file is part of lingdicion.
     Initially written according to the guidelines in the Masterarbeit of Eugen Labun.
 
     Lamdheal is free software: you can redistribute it and/or modify
