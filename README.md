@@ -1,5 +1,8 @@
 lingdicion
 ==========
+
+[still (and probably forever) experimental]
+
 lingdicion is a homoiconic language made of dictionaries.
 It is intended to be the dictionary sweet spot counterpart of Lisp.
 
